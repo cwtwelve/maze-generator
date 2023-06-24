@@ -1,3 +1,3 @@
-import { GridOptions } from './maze-types';
+import { GridOptions } from "./maze-types";
 
 export type { GridOptions };

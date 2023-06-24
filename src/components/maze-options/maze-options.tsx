@@ -6,11 +6,11 @@ import { GridOptions } from "@/src/types";
 const MazeOptions = () => {
 	const gridOptions: GridOptions = {
 		rows: 4,
-		columns: 4,
+		columns: 4
 	};
 
-	const columns: number[] = Array(gridOptions.columns).fill(0);
-	const rows: number[][] = Array(gridOptions.rows).fill(columns);
+	const columns: number[] = Array<number>(gridOptions.columns).fill(0);
+	const rows: number[][] = Array<number[]>(gridOptions.rows).fill(columns);
 	const grid: number[][] = [...rows];
 
 	return (

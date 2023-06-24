@@ -1,4 +1,4 @@
-import MazeOptions from '@/src/components/maze-options';
+import MazeOptions from "@/src/components/maze-options";
 
 const Home = () => {
 	return (

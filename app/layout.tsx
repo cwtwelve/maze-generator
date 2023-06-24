@@ -1,10 +1,10 @@
-import './globals.scss';
-import { Inter } from 'next/font/google';
+import "./globals.scss";
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-	title: 'Maze Generator',
+	title: "Maze Generator"
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

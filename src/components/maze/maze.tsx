@@ -8,10 +8,13 @@ const Maze = (props: { grid: number[][] }) => {
 	const drawGrid = () => {
 		return (
 			<div>
-				{grid.map((row) => (
-					<div className="flex">
-						{row.map((column) => (
-							<Cell cellValue={column} />
+				{grid.map((row, rowIndex) => (
+					<div key={rowIndex} className="flex">
+						{row.map((column, columnIndex) => (
+							<Cell
+								key={`${rowIndex},${columnIndex}`}
+								cellValue={column}
+							/>
 						))}
 					</div>
 				))}
