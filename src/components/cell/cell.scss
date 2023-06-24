@@ -5,10 +5,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
 
-.cell:hover {
-	background-color: red;
+	&:hover {
+		background-color: hsl(var(--sc));
+	}
 }
 
 .cell-text {

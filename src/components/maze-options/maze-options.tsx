@@ -1,6 +1,7 @@
 "use client";
 
-import Maze from "../maze";
+import Maze from "@/src/components/maze";
+import { RangeSlider } from "@/src/ui";
 import { GridOptions } from "@/src/types";
 
 const MazeOptions = () => {
@@ -15,6 +16,8 @@ const MazeOptions = () => {
 
 	return (
 		<>
+			<RangeSlider />
+			<RangeSlider />
 			<Maze grid={grid} />
 		</>
 	);
