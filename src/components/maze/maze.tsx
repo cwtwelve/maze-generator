@@ -2,8 +2,17 @@
 
 import Cell from "@/src/components/cell";
 
-const Maze = (props: { grid: number[][] }) => {
-	const { grid } = props;
+interface MazeProps {
+	numRows: number;
+	numColumns: number;
+}
+
+const Maze = (props: MazeProps) => {
+	const { numRows, numColumns } = props;
+
+	const columns: number[] = Array<number>(numColumns).fill(0);
+	const rows: number[][] = Array<number[]>(numRows).fill(columns);
+	const grid: number[][] = [...rows];
 
 	const drawGrid = () => {
 		return (

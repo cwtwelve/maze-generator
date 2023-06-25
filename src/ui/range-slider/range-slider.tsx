@@ -1,26 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-const RangeSlider = (props: any) => {
-	const [value, setValue] = useState("50");
+interface RangeSliderProps {
+	label: string;
+	name: string;
+	min: string;
+	max: string;
+}
 
-	const handleChange = (e: any) => {
-		// console.log(e);
-		setValue(e.target.value);
-	};
+const RangeSlider = (props: RangeSliderProps) => {
+	const { label, name, min, max } = props;
+	const { register } = useFormContext();
 
 	return (
 		<>
+			<label className="label">
+				<span className="label-text">{label}</span>
+			</label>
 			<input
+				{...register(name)}
+				min={min}
+				max={max}
 				type="range"
-				min="0"
-				max="100"
 				className="range"
-				value={value}
-				onChange={handleChange}
 			/>
-			<div className="w-full flex justify-between text-xs px-2"></div>
 		</>
 	);
 };
