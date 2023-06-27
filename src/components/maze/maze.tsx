@@ -1,6 +1,8 @@
 "use client";
 
 import Cell from "@/src/components/cell";
+import { generateInitialCellValues } from "./utilities";
+import classNames from "classnames";
 
 interface MazeProps {
 	numRows: number;
@@ -10,19 +12,22 @@ interface MazeProps {
 const Maze = (props: MazeProps) => {
 	const { numRows, numColumns } = props;
 
-	const columns: number[] = Array<number>(numColumns).fill(0);
-	const rows: number[][] = Array<number[]>(numRows).fill(columns);
-	const grid: number[][] = [...rows];
+	const grid = generateInitialCellValues(numRows, numColumns);
+
+	grid[0][0] = [true, false, true, true];
+	grid[0][1] = [true, true, true, false];
 
 	const drawGrid = () => {
 		return (
-			<div>
+			<div
+				className={classNames("border", "border-solid", "border-black")}
+			>
 				{grid.map((row, rowIndex) => (
 					<div key={rowIndex} className="flex">
 						{row.map((column, columnIndex) => (
 							<Cell
 								key={`${rowIndex},${columnIndex}`}
-								cellValue={column}
+								cellValues={column}
 							/>
 						))}
 					</div>

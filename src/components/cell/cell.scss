@@ -1,7 +1,6 @@
 .cell {
 	height: 40px;
 	width: 40px;
-	border: 1px solid;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -9,8 +8,17 @@
 	&:hover {
 		background-color: hsl(var(--sc));
 	}
-}
 
-.cell-text {
-	font-size: 14px;
+	&.cell-border-top {
+		border-top: 1px solid;
+	}
+	&.cell-border-right {
+		border-right: 1px solid;
+	}
+	&.cell-border-left {
+		border-left: 1px solid;
+	}
+	&.cell-border-bottom {
+		border-bottom: 1px solid;
+	}
 }
