@@ -11,8 +11,8 @@ interface FormData {
 }
 
 const MazeOptions = () => {
-	const [numRows, setNumRows] = useState(5);
-	const [numColumns, setNumColumns] = useState(5);
+	const [numRows, setNumRows] = useState(3);
+	const [numColumns, setNumColumns] = useState(4);
 
 	const inputFieldData = {
 		rows: {

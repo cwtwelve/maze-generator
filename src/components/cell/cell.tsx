@@ -3,9 +3,9 @@
 import "./cell.scss";
 import classNames from "classnames";
 
-const Cell = (props: { cellValues: [boolean, boolean, boolean, boolean] }) => {
-	const { cellValues } = props;
-	const [topBorder, rightBorder, bottomBorder, leftBorder] = cellValues;
+const Cell = (props: { walls: [boolean, boolean, boolean, boolean] }) => {
+	const { walls } = props;
+	const [topBorder, rightBorder, bottomBorder, leftBorder] = walls;
 
 	return (
 		<div

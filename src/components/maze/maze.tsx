@@ -1,7 +1,8 @@
 "use client";
 
 import Cell from "@/src/components/cell";
-import { generateInitialCellValues } from "./utilities";
+import { generateInitialCellValues, createMaze } from "./utilities";
+import cloneDeep from "lodash/cloneDeep";
 import classNames from "classnames";
 
 interface MazeProps {
@@ -14,20 +15,19 @@ const Maze = (props: MazeProps) => {
 
 	const grid = generateInitialCellValues(numRows, numColumns);
 
-	grid[0][0] = [true, false, true, true];
-	grid[0][1] = [true, true, true, false];
+	const solvedGrid = createMaze(cloneDeep(grid), numRows, numColumns);
 
 	const drawGrid = () => {
 		return (
 			<div
 				className={classNames("border", "border-solid", "border-black")}
 			>
-				{grid.map((row, rowIndex) => (
+				{solvedGrid.map((row: any, rowIndex: number) => (
 					<div key={rowIndex} className="flex">
-						{row.map((column, columnIndex) => (
+						{row.map((cellData: any, columnIndex: number) => (
 							<Cell
 								key={`${rowIndex},${columnIndex}`}
-								cellValues={column}
+								walls={cellData.walls}
 							/>
 						))}
 					</div>
