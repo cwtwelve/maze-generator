@@ -2,8 +2,8 @@
 
 import Maze from "@/src/components/maze";
 import { RangeSlider } from "@/src/ui";
-import { useForm, FormProvider } from "react-hook-form";
 import { useState } from "react";
+import { useForm, FormProvider } from "react-hook-form";
 
 interface FormData {
 	rows: string;
@@ -13,6 +13,10 @@ interface FormData {
 const MazeOptions = () => {
 	const [numRows, setNumRows] = useState(3);
 	const [numColumns, setNumColumns] = useState(4);
+	const [startY, setStartY] = useState(0);
+	const [startX, setStartX] = useState(1);
+	const [endY, setEndY] = useState(0);
+	const [endX, setEndX] = useState(0);
 
 	const inputFieldData = {
 		rows: {
@@ -38,6 +42,7 @@ const MazeOptions = () => {
 	const onSubmit = (data: FormData) => {
 		setNumRows(parseInt(data.rows));
 		setNumColumns(parseInt(data.columns));
+		console.log("dsfs");
 	};
 
 	return (
@@ -51,7 +56,14 @@ const MazeOptions = () => {
 					</button>
 				</form>
 			</FormProvider>
-			<Maze numRows={numRows} numColumns={numColumns} />
+			<Maze
+				numRows={numRows}
+				numColumns={numColumns}
+				startY={startY}
+				startX={startX}
+				endY={endY}
+				endX={endX}
+			/>
 		</>
 	);
 };
