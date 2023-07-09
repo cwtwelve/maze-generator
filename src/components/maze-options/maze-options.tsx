@@ -1,14 +1,10 @@
 "use client";
 
 import Maze from "@/src/components/maze";
+import { GridOptionsType } from "@/src/types";
 import { RangeSlider } from "@/src/ui";
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-
-interface FormData {
-	rows: string;
-	columns: string;
-}
 
 const MazeOptions = () => {
 	const [numRows, setNumRows] = useState(3);
@@ -38,11 +34,10 @@ const MazeOptions = () => {
 		[inputFieldData.columns.name]: `${numColumns}`
 	};
 
-	const methods = useForm<FormData>({ defaultValues: initialValues });
-	const onSubmit = (data: FormData) => {
+	const methods = useForm<GridOptionsType>({ defaultValues: initialValues });
+	const onSubmit = (data: GridOptionsType) => {
 		setNumRows(parseInt(data.rows));
 		setNumColumns(parseInt(data.columns));
-		console.log("dsfs");
 	};
 
 	return (

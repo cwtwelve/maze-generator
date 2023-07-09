@@ -1,7 +1,8 @@
 "use client";
 
 import Cell from "@/src/components/cell";
-import { generateInitialCellValues, createMaze } from "./utilities";
+import { CellType } from "@/src/types";
+import { generateInitialCellValues, addCell } from "./utilities";
 import { useState, useEffect } from "react";
 import cloneDeep from "lodash/cloneDeep";
 import classNames from "classnames";
@@ -18,45 +19,45 @@ interface MazeProps {
 const Maze = (props: MazeProps) => {
 	const { numRows, numColumns, startY, startX } = props;
 
-	const [grid, setGrid] = useState(
-		generateInitialCellValues(numRows, numColumns, startY, startX)
-	);
-	const [availableCells, setAvailableCells] = useState([
-		`${startY},${startX}`
-	]);
+	const [grid, setGrid] = useState<null | CellType[][]>(null);
 
-	const x = async () => {
-		let tempGrid = grid;
+	const drawMaze = async (initialCellValues: CellType[][]) => {
+		let buildGrid: CellType[][] = initialCellValues;
+		let availableCells: string[] = [`${startY},${startX}`];
+
 		while (availableCells.length) {
-			console.log(availableCells);
-			const [updatedGrid, updatedAvailableCells] = await createMaze(
-				cloneDeep(tempGrid),
+			const [updatedGrid, updatedAvailableCells] = await addCell(
+				cloneDeep(buildGrid),
 				availableCells,
 				numRows,
 				numColumns
 			);
 
-			tempGrid = updatedGrid;
+			availableCells = updatedAvailableCells;
+			buildGrid = updatedGrid;
 			setGrid(updatedGrid);
-			setAvailableCells(updatedAvailableCells);
 		}
 	};
 
 	useEffect(() => {
-		console.log("fdsfsqqqqq");
-		setGrid(generateInitialCellValues(numRows, numColumns, startY, startX));
-		setAvailableCells([`${startY},${startX}`]);
-		x();
-	}, [numRows, numColumns]);
+		const initialCellValues = generateInitialCellValues(
+			numRows,
+			numColumns,
+			startY,
+			startX
+		);
+		setGrid(initialCellValues);
+		drawMaze(initialCellValues).catch(() => null);
+	}, [numRows, numColumns, startY, startX]);
 
 	const drawGrid = () => {
-		return (
+		return grid ? (
 			<div
 				className={classNames("border", "border-solid", "border-black")}
 			>
-				{grid.map((row: any, rowIndex: number) => (
+				{grid.map((row: CellType[], rowIndex: number) => (
 					<div key={rowIndex} className="flex">
-						{row.map((cellData: any, columnIndex: number) => (
+						{row.map((cellData: CellType, columnIndex: number) => (
 							<Cell
 								key={`${rowIndex},${columnIndex}`}
 								walls={cellData.walls}
@@ -65,7 +66,7 @@ const Maze = (props: MazeProps) => {
 					</div>
 				))}
 			</div>
-		);
+		) : null;
 	};
 
 	return <div className="flex justify-center">{drawGrid()}</div>;
