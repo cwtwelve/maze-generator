@@ -2,8 +2,9 @@
 
 import Cell from "@/src/components/cell";
 import { CellType } from "@/src/types";
+import { BUILD_STATES } from "@/src/constants";
 import { generateInitialCellValues, addCell } from "./utilities";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import cloneDeep from "lodash/cloneDeep";
 import classNames from "classnames";
 
@@ -12,14 +13,16 @@ interface MazeProps {
 	numColumns: number;
 	startY: number;
 	startX: number;
-	endY: number;
-	endX: number;
+	buildState: BUILD_STATES;
+	setBuildState: (argument: BUILD_STATES) => void;
 }
 
 const Maze = (props: MazeProps) => {
-	const { numRows, numColumns, startY, startX } = props;
+	const { numRows, numColumns, startY, startX, buildState, setBuildState } =
+		props;
 
 	const [grid, setGrid] = useState<null | CellType[][]>(null);
+	const cellSize = useRef(40);
 
 	const drawMaze = async (initialCellValues: CellType[][]) => {
 		let buildGrid: CellType[][] = initialCellValues;
@@ -37,18 +40,35 @@ const Maze = (props: MazeProps) => {
 			buildGrid = updatedGrid;
 			setGrid(updatedGrid);
 		}
+
+		setBuildState(BUILD_STATES.CONFIGURE);
 	};
 
 	useEffect(() => {
-		const initialCellValues = generateInitialCellValues(
-			numRows,
-			numColumns,
-			startY,
-			startX
-		);
-		setGrid(initialCellValues);
-		drawMaze(initialCellValues).catch(() => null);
-	}, [numRows, numColumns, startY, startX]);
+		const maximumCellHeight = (window.innerHeight - 100) / numRows;
+		const maximumCellWidth = (window.innerWidth - 100) / numColumns;
+		cellSize.current = Math.min(maximumCellHeight, maximumCellWidth, 40);
+
+		if (buildState === BUILD_STATES.CREATE) {
+			setBuildState(BUILD_STATES.DRAW);
+			const initialCellValues = generateInitialCellValues(
+				numRows,
+				numColumns,
+				startY,
+				startX
+			);
+			setGrid(initialCellValues);
+			drawMaze(initialCellValues).catch(() => null);
+		}
+	}, [
+		numRows,
+		numColumns,
+		startY,
+		startX,
+		buildState,
+		setBuildState,
+		drawMaze
+	]);
 
 	const drawGrid = () => {
 		return grid ? (
@@ -59,6 +79,7 @@ const Maze = (props: MazeProps) => {
 							<Cell
 								key={`${rowIndex},${columnIndex}`}
 								walls={cellData.walls}
+								cellSize={cellSize.current}
 							/>
 						))}
 					</div>
@@ -68,7 +89,15 @@ const Maze = (props: MazeProps) => {
 	};
 
 	return (
-		<div className={classNames("flex", "justify-center", "p-10")}>
+		<div
+			className={classNames(
+				"flex",
+				"justify-center",
+				"items-center",
+				"p-10",
+				{ "h-screen": buildState === BUILD_STATES.DRAW }
+			)}
+		>
 			{drawGrid()}
 		</div>
 	);

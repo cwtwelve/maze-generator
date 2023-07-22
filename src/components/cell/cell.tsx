@@ -2,15 +2,19 @@
 
 import classNames from "classnames";
 
-const Cell = (props: { walls: [boolean, boolean, boolean, boolean] }) => {
-	const { walls } = props;
+interface CellProps {
+	walls: [boolean, boolean, boolean, boolean];
+	cellSize: number;
+}
+
+const Cell = (props: CellProps) => {
+	const { walls, cellSize } = props;
 	const [topBorder, rightBorder, bottomBorder, leftBorder] = walls;
 
 	return (
 		<div
-			style={{ width: `${40}px`, height: `${40}px` }}
+			style={{ width: `${cellSize}px`, height: `${cellSize}px` }}
 			className={classNames(
-				"hover:bg-orange-400",
 				{ "border-t": topBorder },
 				{ "border-r": rightBorder },
 				{ "border-b": bottomBorder },

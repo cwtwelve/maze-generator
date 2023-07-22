@@ -128,7 +128,7 @@ const addCell = async (
 	);
 
 	if (unexploredNeighbors !== null && unexploredNeighbors.length) {
-		await sleep(200);
+		await sleep(20);
 		const neighborDirection = unexploredNeighbors[0].direction;
 		const neighborCoordinates = unexploredNeighbors[0].coordinates;
 		const neighborY = neighborCoordinates[0];

@@ -1,0 +1,7 @@
+enum BUILD_STATES {
+	CREATE,
+	DRAW,
+	CONFIGURE
+}
+
+export default BUILD_STATES;

@@ -2,14 +2,12 @@
 
 import { ButtonType } from "@/src/types";
 import classNames from "classnames";
-import { useFormContext } from "react-hook-form";
 
 const Button = (props: ButtonType) => {
-	const { label, name, type } = props;
-	const { register } = useFormContext();
+	const { label, type } = props;
 
 	return (
-		<button {...register(name)} type={type} className={classNames("btn")}>
+		<button type={type} className={classNames("btn", "normal-case")}>
 			{label}
 		</button>
 	);

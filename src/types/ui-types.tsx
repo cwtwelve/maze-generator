@@ -7,6 +7,5 @@ export interface RangeSliderType {
 
 export interface ButtonType {
 	label: string;
-	name: string;
 	type: "button" | "submit" | "reset";
 }
