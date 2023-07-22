@@ -8,10 +8,8 @@ const Cell = (props: { walls: [boolean, boolean, boolean, boolean] }) => {
 
 	return (
 		<div
-			// style={{ width: `${40}px`, height: `${40}px` }}
+			style={{ width: `${40}px`, height: `${40}px` }}
 			className={classNames(
-				`w-[${40}px]`,
-				`h-[${40}px]`,
 				"hover:bg-orange-400",
 				{ "border-t": topBorder },
 				{ "border-r": rightBorder },
