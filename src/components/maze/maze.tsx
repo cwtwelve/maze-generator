@@ -52,9 +52,7 @@ const Maze = (props: MazeProps) => {
 
 	const drawGrid = () => {
 		return grid ? (
-			<div
-				className={classNames("border", "border-solid", "border-black")}
-			>
+			<div className={classNames("border", "border-solid")}>
 				{grid.map((row: CellType[], rowIndex: number) => (
 					<div key={rowIndex} className="flex">
 						{row.map((cellData: CellType, columnIndex: number) => (
@@ -69,7 +67,11 @@ const Maze = (props: MazeProps) => {
 		) : null;
 	};
 
-	return <div className="flex justify-center">{drawGrid()}</div>;
+	return (
+		<div className={classNames("flex", "justify-center", "p-10")}>
+			{drawGrid()}
+		</div>
+	);
 };
 
 export default Maze;

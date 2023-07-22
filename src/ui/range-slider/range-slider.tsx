@@ -1,15 +1,10 @@
 "use client";
 
+import { RangeSliderType } from "@/src/types";
+import classNames from "classnames";
 import { useFormContext } from "react-hook-form";
 
-interface RangeSliderProps {
-	label: string;
-	name: string;
-	min: string;
-	max: string;
-}
-
-const RangeSlider = (props: RangeSliderProps) => {
+const RangeSlider = (props: RangeSliderType) => {
 	const { label, name, min, max } = props;
 	const { register } = useFormContext();
 
@@ -23,7 +18,7 @@ const RangeSlider = (props: RangeSliderProps) => {
 				min={min}
 				max={max}
 				type="range"
-				className="range"
+				className={classNames("range")}
 			/>
 		</>
 	);
