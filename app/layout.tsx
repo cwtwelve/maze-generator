@@ -1,7 +1,7 @@
 import "./globals.scss";
-import { Inter } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const robotoMono = Roboto_Mono({ subsets: ["latin"] });
 
 export const metadata = {
 	title: "Maze Generator"
@@ -10,7 +10,7 @@ export const metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<html>
-			<body className={inter.className}>{children}</body>
+			<body className={robotoMono.className}>{children}</body>
 		</html>
 	);
 };

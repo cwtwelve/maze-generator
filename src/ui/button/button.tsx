@@ -7,7 +7,10 @@ const Button = (props: ButtonType) => {
 	const { label, type } = props;
 
 	return (
-		<button type={type} className={classNames("btn", "normal-case")}>
+		<button
+			type={type}
+			className={classNames("btn", "normal-case", "font-normal")}
+		>
 			{label}
 		</button>
 	);
